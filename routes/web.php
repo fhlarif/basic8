@@ -44,6 +44,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard',compact('users'));
 })->name('dashboard');
 
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
 //Category
 Route::get('/category/all',[CategoryController::class, 'allCategory'])->name('all.category');
 Route::post('/category/add',[CategoryController::class, 'addCategory'])->name('store.category');
