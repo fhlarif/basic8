@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserLogout;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/home', function () {
@@ -35,14 +36,19 @@ Route::get('/about', function(){
 
 Route::get('/contact-yeyeg3483923bfdbcdusf',[ContactController::class, 'index'])->name('contact');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+/* Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
    //ORM
     // $users = User::all();
     
     //Query Builder
     $users = DB::table('users')->get();
     return view('dashboard',compact('users'));
-})->name('dashboard');
+})->name('dashboard'); */
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+     return view('admin.index');
+ })->name('dashboard');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -74,7 +80,11 @@ Route::get('/multipic/restore/{id}',[BrandController::class, 'restoreMultipic'])
 Route::get('/multipic/pdelete/{id}',[BrandController::class, 'pdeleteMultipic'])->name('pdelete.multipic');
 
 
+//User Logout
+Route::get('/user/logout',[UserLogout::class, 'userLogout'])->name('user.logout');
 
+
+//Test Livewire
 Route::get('test', function () {
 
     return view('default');
