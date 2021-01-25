@@ -140,7 +140,7 @@
                                         @endif
                                        </td>
                                        <td><a href="{{ url('category/restore/'.$category->id) }}" class="btn btn-info">Restore</a>
-                                        <a href="{{ url('category/pdelete/'.$category->id) }}" class="btn btn-danger">Permanent Delete</a>
+                                        <a href="{{ url('category/pdelete/'.$category->id) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to permanently delete the item?')">Permanent Delete</a>
                                     </td>
                                 </tr>    
                                 @endforeach
@@ -148,7 +148,7 @@
 
                             </tbody>
                         </table>
-                        {{ $categories->links() }}
+                        {{ $trashCategories->links() }}
 
                     </div>
                 </div>
@@ -159,6 +159,7 @@
 
             </div>
         </div>
+        {{-- End Thrash List --}}
 
     </div>
 </x-app-layout>
