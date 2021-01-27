@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserLogout;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,16 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $brands = DB::table('brands')->get();
+    return view('home',compact('brands'));
 });
+
+/* Route::get('/phpinfo', function () {
+    echo 'hello';
+    $i=1;
+    $i++; 
+    phpinfo();
+}); */
 
 Route::get('/home', function () {
     echo 'This is redirect to home because middleware';
@@ -78,6 +87,9 @@ Route::post('/multipic/add',[BrandController::class, 'addMultipic'])->name('add.
 Route::get('/multipic/softdelete/{id}',[BrandController::class, 'softdeleteMultipic'])->name('softdelete.multipic');
 Route::get('/multipic/restore/{id}',[BrandController::class, 'restoreMultipic'])->name('restore.multipic');
 Route::get('/multipic/pdelete/{id}',[BrandController::class, 'pdeleteMultipic'])->name('pdelete.multipic');
+
+//Admin All Route
+Route::get('/home/slider',[HomeController::class, 'homeSlider'])->name('home.slider');
 
 
 //User Logout
