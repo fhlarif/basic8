@@ -39,13 +39,13 @@
                                 </a>
                             </li> 
                             <li class="active">
-                                <a class="sidenav-item-link" href="index.html">
+                                <a class="sidenav-item-link" href="{{ route('home.about') }}">
                                     <span class="nav-text">Home About</span>
 
                                 </a>
                             </li> 
                             <li class="active">
-                                <a class="sidenav-item-link" href="index.html">
+                                <a class="sidenav-item-link" href="{{ route('all.multipic') }}">
                                     <span class="nav-text">Home Portfolio</span>
 
                                 </a>

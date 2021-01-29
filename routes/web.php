@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserLogout;
+use App\Models\Multipic;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\AssignOp\Mul;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,9 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     $brands = DB::table('brands')->get();
-    return view('home',compact('brands'));
+    $abouts = DB::table('home_abouts')->first();
+    $images = Multipic::all();
+    return view('home',compact('brands','abouts','images'));
 });
 
 /* Route::get('/phpinfo', function () {
@@ -88,12 +93,28 @@ Route::get('/multipic/softdelete/{id}',[BrandController::class, 'softdeleteMulti
 Route::get('/multipic/restore/{id}',[BrandController::class, 'restoreMultipic'])->name('restore.multipic');
 Route::get('/multipic/pdelete/{id}',[BrandController::class, 'pdeleteMultipic'])->name('pdelete.multipic');
 
-//Admin All Route
+//Slider
 Route::get('/home/slider',[HomeController::class, 'homeSlider'])->name('home.slider');
+Route::get('/add/slider',[HomeController::class, 'addSlider'])->name('add.slider');
+Route::post('/store/slider',[HomeController::class, 'storeSlider'])->name('store.slider');
+Route::get('/edit/slider/{id}',[HomeController::class, 'editSlider'])->name('edit.slider');
+Route::post('/update/slider/{id}',[HomeController::class, 'updateSlider'])->name('update.slider');
+Route::get('/delete/slider/{id}',[HomeController::class, 'deleteSlider'])->name('delete.slider');
 
+//Home About
+Route::get('/home/about',[AboutController::class, 'homeAbout'])->name('home.about');
+Route::get('/add/about',[AboutController::class, 'addAbout'])->name('add.about');
+Route::post('/store/about',[AboutController::class, 'storeAbout'])->name('store.about');
+Route::get('/edit/about/{id}',[AboutController::class, 'editAbout'])->name('edit.about');
+Route::post('/update/about/{id}',[AboutController::class, 'updateAbout'])->name('update.about');
+Route::get('/delete/about/{id}',[AboutController::class, 'deleteAbout'])->name('delete.about');
+
+//Portfolio
+Route::get('/portfolio',[AboutController::class, 'Portfolio'])->name('portfolio');
 
 //User Logout
 Route::get('/user/logout',[UserLogout::class, 'userLogout'])->name('user.logout');
+
 
 
 //Test Livewire
